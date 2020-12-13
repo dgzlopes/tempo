@@ -34,7 +34,7 @@ jobs:
         kubectl cluster-info
         helm install operations/helm/tempo-microservices/ --generate-name
         kubectl create -f example/helm/microservices-extras.yaml
-        kubectl rollout status deployment synthetic-load-generator
+        kubectl wait --for=condition=Ready pods --all --timeout=600s
         kubectl get deployments
         kubectl get pods
         kubectl get services
