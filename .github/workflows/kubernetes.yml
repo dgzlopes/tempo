@@ -32,10 +32,9 @@ jobs:
     - name: Example tests
       run: |
         kubectl cluster-info
-        helm install operations/helm/tempo-microservices/ --generate-name
+        helm install operations/helm/tempo-microservices/ --wait --generate-name
         kubectl create -f example/helm/microservices-extras.yaml
         sleep 10
-        kubectl wait --for=condition=Ready pods --all --timeout=600s
         kubectl get deployments
         kubectl get pods
         kubectl get services
