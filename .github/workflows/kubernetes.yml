@@ -35,6 +35,7 @@ jobs:
 
     - name: Example tests
       run: |
+        kubectl rollout status deployment synthetic-load-generator
         kubectl get nodes
         kubectl get deployments
         kubectl get pods
