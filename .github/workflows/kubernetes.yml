@@ -16,10 +16,11 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
-    - name: Install K3d and run cluster
-      run: |
-        wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
-        k3d cluster create tempo --api-port 6443 --port "16686:80@loadbalancer"
+    - name: Install K3d
+      run: wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+
+    - name: Run cluster
+      run: k3d cluster create tempo --api-port 6443 --port "16686:80@loadbalancer"
 
     - name: Install Helm
       uses: azure/setup-helm@v1
@@ -27,12 +28,13 @@ jobs:
         version: 'latest' # default is latest stable
       id: install
 
+    - name: Deploy Tempo (microservices)
+      run: |
+        helm install operations/helm/tempo-microservices/ --wait --generate-name
+        kubectl create -f example/helm/microservices-extras.yaml
+
     - name: Example tests
       run: |
-        kubectl cluster-info
-        helm install operations/helm/tempo-microservices/ --generate-name
-        kubectl create -f example/helm/microservices-extras.yaml
-        sleep 120
         kubectl get nodes
         kubectl get deployments
         kubectl get pods
