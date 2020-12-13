@@ -36,3 +36,5 @@ jobs:
         kubectl create -f example/helm/microservices-extras.yaml
         sleep 5
         kubectl get namespaces
+        kubectl cluster-info dump
+        k3s kubectl get pods
