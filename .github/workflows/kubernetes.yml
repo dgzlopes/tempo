@@ -34,6 +34,6 @@ jobs:
         kubectl cluster-info
         helm install operations/helm/tempo-microservices/ --generate-name
         kubectl create -f example/helm/microservices-extras.yaml
-        sleep 20
+        sleep 40
         kubectl get pods
-        k3s kubectl get pods
+        kubectl get services
