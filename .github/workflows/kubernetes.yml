@@ -16,7 +16,7 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
-    - name: Install K3d
+    - name: Install k3d
       run: wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
 
     - name: Run cluster
@@ -28,10 +28,10 @@ jobs:
         version: 'latest' # default is latest stable
       id: install
 
-    - name: Deploy Tempo (microservices)
+    - name: Deploy Tempo
       run: |
-        helm install operations/helm/tempo-microservices/ --wait --generate-name
-        kubectl create -f example/helm/microservices-extras.yaml
+        helm install operations/helm/tempo-single-binary/ --wait --generate-name
+        kubectl create -f example/helm/single-binary-extras.yaml
 
     - name: Example tests
       run: |
