@@ -33,5 +33,5 @@ jobs:
       run: |
         kubectl cluster-info
         helm install operations/helm/tempo-microservices/ --generate-name
-        kubectl create -f microservices-extras.yaml
+        kubectl create -f example/helm/microservices-extras.yaml
         kubectl get pods
