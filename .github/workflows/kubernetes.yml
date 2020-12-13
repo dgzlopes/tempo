@@ -42,3 +42,7 @@ jobs:
         kubectl get deployments
         kubectl get pods
         kubectl get services
+
+    - name: Example tests 2
+      run: |
+        kubectl logs --tail=1 deployment/synthetic-load-generator
