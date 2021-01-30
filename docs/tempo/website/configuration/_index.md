@@ -116,7 +116,7 @@ storage:
             bucket_name: ops-tools-tracing-ops   # store traces in this bucket
 
         blocklist_poll: 5m                       # how often to repoll the backend for new blocks
-        cache: memcached                         # optional cache configuration
+        cache: memcached                         # optional cache configuration to use
         memcached:                               # optional memcached configuration
             consistent_hash: true
             host: memcached
