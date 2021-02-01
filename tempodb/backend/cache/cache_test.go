@@ -9,7 +9,6 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/google/uuid"
 	"github.com/grafana/tempo/tempodb/backend"
-	"github.com/grafana/tempo/tempodb/backend/cache"
 	"github.com/grafana/tempo/tempodb/backend/cache/redis"
 	"github.com/grafana/tempo/tempodb/backend/util"
 	"github.com/stretchr/testify/assert"
@@ -65,7 +64,7 @@ func TestCache(t *testing.T) {
 				},
 			}, logger)
 
-			rw, _, _ := cache.NewCache(mockR, mockW, cacheBackend)
+			rw, _, _ := NewCache(mockR, mockW, cacheBackend)
 
 			ctx := context.Background()
 			tenants, _ := rw.Tenants(ctx)
